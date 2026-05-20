@@ -17,9 +17,11 @@ public class UserFactory {
      * @throws IllegalArgumentException if type is null, empty, or unrecognized
      */
     public static User createUser(String type, String username, String email, String password, int age) {
+        // Validate the type argument before calling toLowerCase to avoid NullPointerException
         if (type == null || type.isEmpty()) {
             throw new IllegalArgumentException("User type must not be null or empty");
         }
+        // Dispatch to the concrete subclass matching the requested tier
         switch (type.toLowerCase()) {
             case "basic":
                 return new BasicUser(username, email, password, age);
@@ -28,6 +30,7 @@ public class UserFactory {
             case "platinum":
                 return new PlatinumUser(username, email, password, age);
             default:
+                // No matching tier — inform the caller with a descriptive message
                 throw new IllegalArgumentException("Unknown user type: " + type);
         }
     }

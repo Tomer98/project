@@ -7,6 +7,8 @@ import java.util.Optional;
  */
 public interface ValidationResult {
 
+    // --- Query methods ---
+
     /**
      * Returns true if the validation passed.
      *

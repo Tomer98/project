@@ -10,6 +10,8 @@ import java.util.function.Function;
  */
 public interface UserValidator extends Function<User, ValidationResult> {
 
+    // --- Composition operators ---
+
     /**
      * Returns a validation that passes only when both this rule and {@code other} pass.
      *
@@ -18,6 +20,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     default UserValidator and(UserValidator other) {
         return user -> {
+            // Short-circuit: return the failure immediately if this rule fails
             ValidationResult result = this.apply(user);
             if (!result.isValid()) {
                 return result;
@@ -34,6 +37,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     default UserValidator or(UserValidator other) {
         return user -> {
+            // Short-circuit: return success immediately if this rule passes
             ValidationResult result = this.apply(user);
             if (result.isValid()) {
                 return result;
@@ -54,12 +58,15 @@ public interface UserValidator extends Function<User, ValidationResult> {
             ValidationResult second = other.apply(user);
             boolean firstValid = first.isValid();
             boolean secondValid = second.isValid();
+            // XOR fails when both rules agree (both pass or both fail)
             if (firstValid ^ secondValid) {
                 return new Valid();
             }
             return new Invalid("XOR condition failed: both conditions have the same result");
         };
     }
+
+    // --- Aggregate operators ---
 
     /**
      * Returns a validation that passes only when every rule in {@code validations} passes.
@@ -69,6 +76,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator all(UserValidator... validations) {
         return user -> {
+            // Return the first failure encountered, or Valid if all pass
             for (UserValidator validation : validations) {
                 ValidationResult result = validation.apply(user);
                 if (!result.isValid()) {
@@ -87,6 +95,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator none(UserValidator... validations) {
         return user -> {
+            // Return Invalid as soon as one rule passes unexpectedly
             for (UserValidator validation : validations) {
                 ValidationResult result = validation.apply(user);
                 if (result.isValid()) {
@@ -97,6 +106,8 @@ public interface UserValidator extends Function<User, ValidationResult> {
         };
     }
 
+    // --- Email rules ---
+
     /**
      * Returns a rule that checks whether the user's email ends with "il".
      *
@@ -104,6 +115,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator emailEndsWithIL() {
         return user -> {
+            // Check the final two characters of the email address
             if (user.getEmail().endsWith("il")) {
                 return new Valid();
             }
@@ -118,12 +130,15 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator emailLengthBiggerThan10() {
         return user -> {
+            // Minimum email length guards against placeholder addresses
             if (user.getEmail().length() > 10) {
                 return new Valid();
             }
             return new Invalid("Email length is not greater than 10");
         };
     }
+
+    // --- Password rules ---
 
     /**
      * Returns a rule that checks whether the user's password is longer than 8 characters.
@@ -132,6 +147,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator passwordLengthBiggerThan8() {
         return user -> {
+            // Passwords shorter than 9 characters are considered too weak
             if (user.getPassword().length() > 8) {
                 return new Valid();
             }
@@ -146,6 +162,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator passwordIncludesLettersNumbersOnly() {
         return user -> {
+            // Regex ensures no special characters are present
             if (user.getPassword().matches("[a-zA-Z0-9]+")) {
                 return new Valid();
             }
@@ -160,6 +177,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator passwordIncludesDollarSign() {
         return user -> {
+            // Dollar sign is required as a special character in certain tiers
             if (user.getPassword().contains("$")) {
                 return new Valid();
             }
@@ -174,12 +192,15 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator passwordIsDifferentFromUsername() {
         return user -> {
+            // Using the username as a password is a well-known security anti-pattern
             if (!user.getPassword().equals(user.getUsername())) {
                 return new Valid();
             }
             return new Invalid("Password must be different from username");
         };
     }
+
+    // --- Age and username rules ---
 
     /**
      * Returns a rule that checks whether the user's age is greater than 18.
@@ -188,6 +209,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator ageBiggerThan18() {
         return user -> {
+            // Enforce legal age requirement
             if (user.getAge() > 18) {
                 return new Valid();
             }
@@ -202,6 +224,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      */
     static UserValidator usernameLengthBiggerThan8() {
         return user -> {
+            // Short usernames are more susceptible to brute-force guessing
             if (user.getUsername().length() > 8) {
                 return new Valid();
             }

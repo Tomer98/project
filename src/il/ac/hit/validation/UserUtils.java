@@ -15,14 +15,17 @@ public class UserUtils {
      * @throws IllegalArgumentException if users or comparator is null
      */
     public static void sort(User[] users, Comparator<User> comparator) {
+        // Validate both arguments before touching the array
         if (users == null) {
             throw new IllegalArgumentException("Users array must not be null");
         }
         if (comparator == null) {
             throw new IllegalArgumentException("Comparator must not be null");
         }
+        /* Bubble sort: each pass bubbles the largest unsorted element to its final position */
         for (int i = 0; i < users.length - 1; i++) {
             for (int j = 0; j < users.length - 1 - i; j++) {
+                // Swap adjacent elements when they are out of order
                 if (comparator.compare(users[j], users[j + 1]) > 0) {
                     User temp = users[j];
                     users[j] = users[j + 1];
