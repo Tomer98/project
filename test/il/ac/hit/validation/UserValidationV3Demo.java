@@ -3,7 +3,7 @@ package il.ac.hit.validation;
 /**
  * Demonstrates composing UserValidator rules with logical AND.
  */
-public class UserValidationV2Demo {
+public class UserValidationV3Demo {
 
     /**
      * Entry point for the validation demo.
