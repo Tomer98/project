@@ -113,7 +113,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
      *
      * @return the email domain rule
      */
-    static UserValidator emailEndsWithIL() {
+    static UserValidator emailEndsWithIl() {
         return user -> {
             // Check the final two characters of the email address
             if (user.getEmail().endsWith("il")) {
@@ -170,6 +170,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
         };
     }
 
+    // Dollar sign rule — checks for mandatory special character
     /**
      * Returns a rule that checks whether the user's password contains a dollar sign.
      *
@@ -217,6 +218,7 @@ public interface UserValidator extends Function<User, ValidationResult> {
         };
     }
 
+    // Username length rule — checks minimum identifier length
     /**
      * Returns a rule that checks whether the user's username is longer than 8 characters.
      *

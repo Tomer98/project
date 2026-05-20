@@ -18,6 +18,7 @@ public abstract class User {
     /** The user's email address. */
     private String email;
 
+    // Password and age complete the core user profile
     /** The user's password. */
     private String password;
 
@@ -72,6 +73,7 @@ public abstract class User {
      * @return the username
      */
     public String getUsername() {
+        // Return the stored username
         return username;
     }
 
@@ -121,6 +123,7 @@ public abstract class User {
         this.username = username;
     }
 
+    // Email field setter
     /**
      * Sets the email address.
      *
@@ -135,6 +138,7 @@ public abstract class User {
         this.email = email;
     }
 
+    // Password field setter
     /**
      * Sets the password.
      *
@@ -149,6 +153,7 @@ public abstract class User {
         this.password = password;
     }
 
+    // Age field setter
     /**
      * Sets the age.
      *
@@ -173,6 +178,7 @@ public abstract class User {
      */
     @Override
     public boolean equals(Object o) {
+        // Check reference equality first as a fast path
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         // Compare every field to determine logical equality
@@ -190,6 +196,7 @@ public abstract class User {
      */
     @Override
     public int hashCode() {
+        // Combine all fields for a hash consistent with equals
         return Objects.hash(username, email, password, age);
     }
 
@@ -200,6 +207,7 @@ public abstract class User {
      */
     @Override
     public String toString() {
+        // Format identifying fields as a readable string
         return "User{username='" + username + "', email='" + email + "', age=" + age + "}";
     }
 }

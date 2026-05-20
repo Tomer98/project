@@ -21,6 +21,7 @@ public class PlatinumUser extends User {
         super(username, email, password, age);
     }
 
+    // Hook implementation for tier-specific validation
     /**
      * Returns the validation rule for the platinum tier.
      * Hook implementation — the strictest rule set, requiring Israeli email and unique password.
@@ -34,7 +35,7 @@ public class PlatinumUser extends User {
                 .and(UserValidator.usernameLengthBiggerThan8())
                 .and(UserValidator.passwordLengthBiggerThan8())
                 .and(UserValidator.passwordIsDifferentFromUsername())
-                .and(UserValidator.emailEndsWithIL());
+                .and(UserValidator.emailEndsWithIl());
     }
 
     /**

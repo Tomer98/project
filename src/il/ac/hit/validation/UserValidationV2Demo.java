@@ -18,7 +18,7 @@ public class UserValidationV2Demo {
 
         /* Build the rule: email must be longer than 10 chars AND end with "il" */
         UserValidator validation = UserValidator.emailLengthBiggerThan10()
-                .and(UserValidator.emailEndsWithIL());
+                .and(UserValidator.emailEndsWithIl());
 
         // Apply the composed rule to the user and inspect the result
         ValidationResult result = validation.apply(user);

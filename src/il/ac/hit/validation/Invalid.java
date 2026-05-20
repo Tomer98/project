@@ -39,6 +39,7 @@ public class Invalid implements ValidationResult {
         return false;
     }
 
+    // Reason accessor — always present since Invalid requires a non-empty reason
     /**
      * Returns the failure reason wrapped in an Optional.
      *
@@ -50,6 +51,7 @@ public class Invalid implements ValidationResult {
         return Optional.of(reason);
     }
 
+    // String representation — includes reason for easy debugging
     /**
      * Returns a human-readable representation of this result.
      *

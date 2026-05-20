@@ -21,6 +21,7 @@ public class BasicUser extends User {
         super(username, email, password, age);
     }
 
+    // Hook implementation for tier-specific validation
     /**
      * Returns the validation rule for the basic tier.
      * Hook implementation — requires age over 18 and username longer than 8 chars.

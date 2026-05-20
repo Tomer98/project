@@ -16,7 +16,7 @@ public class UserValidationV2Demo {
 
         /* Compose two rules with AND: both email conditions must hold */
         UserValidator validation1 = UserValidator.emailLengthBiggerThan10();
-        UserValidator validation2 = UserValidator.emailEndsWithIL();
+        UserValidator validation2 = UserValidator.emailEndsWithIl();
 
         // Apply the combined rule and print the outcome
         ValidationResult result = (validation1.and(validation2)).apply(user);

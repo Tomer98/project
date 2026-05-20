@@ -20,6 +20,7 @@ public class Valid implements ValidationResult {
         return true;
     }
 
+    // Reason accessor — always empty for a successful result
     /**
      * Returns an empty Optional because a valid result has no failure reason.
      *
@@ -31,6 +32,7 @@ public class Valid implements ValidationResult {
         return Optional.empty();
     }
 
+    // String representation — fixed since Valid holds no state
     /**
      * Returns a human-readable representation of this result.
      *

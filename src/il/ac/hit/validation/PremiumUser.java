@@ -21,6 +21,7 @@ public class PremiumUser extends User {
         super(username, email, password, age);
     }
 
+    // Hook implementation for tier-specific validation
     /**
      * Returns the validation rule for the premium tier.
      * Hook implementation — adds a password-length requirement on top of basic rules.
