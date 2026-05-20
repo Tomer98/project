@@ -42,6 +42,7 @@ public class PremiumUser extends User {
      */
     @Override
     public String toString() {
+        // Include tier label so the output distinguishes PremiumUser from other subtypes
         return "PremiumUser{username='" + getUsername() + "', email='" + getEmail() + "', age=" + getAge() + "}";
     }
 }

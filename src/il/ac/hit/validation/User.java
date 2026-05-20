@@ -81,6 +81,7 @@ public abstract class User {
      * @return the email
      */
     public String getEmail() {
+        // Return the stored email address
         return email;
     }
 
@@ -90,6 +91,7 @@ public abstract class User {
      * @return the password
      */
     public String getPassword() {
+        // Return the stored password
         return password;
     }
 
@@ -99,6 +101,7 @@ public abstract class User {
      * @return the age
      */
     public int getAge() {
+        // Return the stored age
         return age;
     }
 
@@ -125,6 +128,7 @@ public abstract class User {
      * @throws IllegalArgumentException if email is null or empty
      */
     public void setEmail(String email) {
+        // Reject null or empty values before assignment
         if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Email must not be null or empty");
         }
@@ -138,6 +142,7 @@ public abstract class User {
      * @throws IllegalArgumentException if password is null or empty
      */
     public void setPassword(String password) {
+        // Reject null or empty values before assignment
         if (password == null || password.isEmpty()) {
             throw new IllegalArgumentException("Password must not be null or empty");
         }

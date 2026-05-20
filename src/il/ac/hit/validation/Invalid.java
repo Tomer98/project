@@ -35,6 +35,7 @@ public class Invalid implements ValidationResult {
      */
     @Override
     public boolean isValid() {
+        // A failed result always reports false
         return false;
     }
 
@@ -56,6 +57,7 @@ public class Invalid implements ValidationResult {
      */
     @Override
     public String toString() {
+        // Include the reason so callers can read it directly from the string
         return "Invalid{reason='" + reason + "'}";
     }
 }

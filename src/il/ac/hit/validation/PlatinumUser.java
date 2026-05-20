@@ -44,6 +44,7 @@ public class PlatinumUser extends User {
      */
     @Override
     public String toString() {
+        // Include tier label so the output distinguishes PlatinumUser from other subtypes
         return "PlatinumUser{username='" + getUsername() + "', email='" + getEmail() + "', age=" + getAge() + "}";
     }
 }

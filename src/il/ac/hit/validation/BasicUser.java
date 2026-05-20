@@ -41,6 +41,7 @@ public class BasicUser extends User {
      */
     @Override
     public String toString() {
+        // Include tier label so the output distinguishes BasicUser from other subtypes
         return "BasicUser{username='" + getUsername() + "', email='" + getEmail() + "', age=" + getAge() + "}";
     }
 }

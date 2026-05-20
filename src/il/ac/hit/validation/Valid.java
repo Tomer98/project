@@ -16,6 +16,7 @@ public class Valid implements ValidationResult {
      */
     @Override
     public boolean isValid() {
+        // A valid result always reports true
         return true;
     }
 
@@ -37,6 +38,7 @@ public class Valid implements ValidationResult {
      */
     @Override
     public String toString() {
+        // Produce a fixed label — Valid carries no extra state
         return "Valid{}";
     }
 }
